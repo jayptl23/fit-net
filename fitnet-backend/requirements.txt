@@ -1,0 +1,4 @@
+django
+djangorestframework
+geopy
+drf_yasg

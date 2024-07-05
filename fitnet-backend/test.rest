@@ -1,0 +1,85 @@
+# Register happy path
+POST http://127.0.0.1:8000/signup/ 
+Content-Type: application/json
+
+{ "username": "adam", "password": "adam", "email": "adam@mail.com" }
+
+###
+
+# Register username and email already in use
+POST http://127.0.0.1:8000/signup/ 
+Content-Type: application/json
+
+{ "username": "adam", "password": "adam", "email": "adam@mail.com" }
+
+###
+
+# Login happy path
+POST http://127.0.0.1:8000/login/ 
+Content-Type: application/json
+
+{ "username": "adam", "password": "adam" }
+
+###
+
+# Login missing password
+POST http://127.0.0.1:8000/login/ 
+Content-Type: application/json
+
+{ "username": "adam" }
+
+###
+
+# Login missing username
+POST http://127.0.0.1:8000/login/ 
+Content-Type: application/json
+
+{ "password": "wrong" }
+
+###
+
+# Login bad password
+POST http://127.0.0.1:8000/login/ 
+Content-Type: application/json
+
+{ "username": "adam", "password": "adam100" }
+
+### 
+
+# Login user does not exist
+POST http://127.0.0.1:8000/login/ 
+Content-Type: application/json
+
+{ "username": "chet", "password": "adam" }
+
+###
+
+# List user classes
+GET http://127.0.0.1:8000/users/5/classes 
+Authorization: token c0f1384522c52374b35393f34978f1c733e05a0f
+
+###
+
+# Enroll in a class
+POST http://127.0.0.1:8000/user/5/enroll/1/ 
+Authorization: token c0f1384522c52374b35393f34978f1c733e05a0f
+
+###
+
+# Enroll somone else in a class = BAD
+POST http://127.0.0.1:8000/user/1/enroll/1/ 
+Authorization: token c0f1384522c52374b35393f34978f1c733e05a0f
+
+###
+
+# TEST: unenroll
+
+# Unenroll in a class
+POST http://127.0.0.1:8000/user/5/unenroll/1/ 
+Authorization: token c0f1384522c52374b35393f34978f1c733e05a0f
+
+###
+
+# Unenroll somone else in a class = BAD
+POST http://127.0.0.1:8000/user/1/enroll/1/ 
+Authorization: token c0f1384522c52374b35393f34978f1c733e05a0f
